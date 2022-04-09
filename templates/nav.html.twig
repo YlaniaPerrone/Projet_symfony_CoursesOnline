@@ -1,0 +1,53 @@
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+        <h1 class="logo me-auto"><a href="{{ path('app_home') }}">Mentor</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a href="">About</a></li>
+                <li><a href="">Cours</a></li>
+                <li><a href="{{ path('register_company') }}">Trainers</a></li>
+{#                <li><a href="">Contact</a></li>#}
+
+                {% if app.user %}
+                {# <a class="link" href="{{ path('app_logout') }}">Logout</a> #}
+                <li class="dropdown"><a href="#"><span>{{ app.user.firstname|capitalize }} {{ app.user.name|upper }}</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+{#                        <li><a href="{{ path('profile_client') }}">Profile</a></li>#}
+{#                        <li><a href="#">Cours suivi</a></li>#}
+{#                        <li><a href="#">Drop Down 4</a></li>#}
+                        <div class="dropdown-divider"></div>
+                        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                        {# <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a> #}
+                        {# <ul> #}
+                        {# <li><a href="#">Deep Drop Down 1</a></li> #}
+                        {# <li><a href="#">Deep Drop Down 2</a></li> #}
+                        {# <li><a href="#">Deep Drop Down 3</a></li> #}
+                        {# <li><a href="#">Deep Drop Down 4</a></li> #}
+                        {# <li><a href="#">Deep Drop Down 5</a></li> #}
+                        {# </ul> #}
+                        {# </li> #}
+                    </ul>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="get-started-btn">login</a>
+
+            {% endif %}
+
+        </nav>
+        <!-- .navbar -->
+        {# {% if app.user %} #}
+        {# <a class="link" href="{{ path('app_logout') }}">Logout</a> #}
+        {# {% else %} #}
+        {# <a href="{{ path('app_login') }}" class="get-started-btn">login</a> #}
+
+        {# {% endif %} #}
+
+
+    </div>
+</header>

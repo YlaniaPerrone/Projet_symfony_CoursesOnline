@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Company;
 use App\Entity\Trainer;
 
 use App\Repository\CoursRepository;
@@ -39,31 +38,32 @@ class Cours
     #[ORM\Column(type: 'datetime')]
     private $Date;
 
-    #[ORM\ManyToOne(targetEntity: Language::class, inversedBy: 'cours')]
+    #[ORM\ManyToOne(targetEntity: Language::class, cascade: ['persist', 'remove'], inversedBy: 'cours')]
     #[ORM\JoinColumn(nullable: false)]
     private $language;
 
-    #[ORM\ManyToOne(targetEntity: Trainer::class, inversedBy: 'cours')]
+    #[ORM\ManyToOne(targetEntity: Trainer::class, cascade: ['persist', 'remove'], inversedBy: 'cours')]
     #[ORM\JoinColumn(nullable: true)]
     private $trainer;
 
-//    #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'cours')]
-//    #[ORM\JoinColumn(nullable: false)]
-//    private $company;
 
-    #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Prestation::class)]
+    #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Prestation::class, cascade: ['persist', 'remove'])]
     private $prestations;
 
-    #[ORM\OneToOne(inversedBy: 'cours', targetEntity: Category::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'cours', targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
+    #[ORM\OneToMany(mappedBy: 'trainer', targetEntity: Cours::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $cours;
 
     public function __construct()
     {
         $this->prestations = new ArrayCollection();
-    }
+        $this->cours = new ArrayCollection();
 
+    }
 
     public function getId(): ?int
     {
@@ -168,12 +168,6 @@ class Cours
     }
 
 
-
-//    public function __toString(): string
-//    {
-//        return  $this->Title;
-//    }
-
     public function getTrainer(): ?Trainer
     {
         return $this->trainer;
@@ -185,18 +179,6 @@ class Cours
 
         return $this;
     }
-//
-//public function getCompany(): ?Company
-//{
-//    return $this->company;
-//}
-//
-//public function setCompany(?Company $company): self
-//{
-//    $this->company = $company;
-//
-//    return $this;
-//}
 
     /**
      * @return Collection<int, Prestation>
@@ -245,5 +227,34 @@ class Cours
         return $this;
     }
 
+    /**
+     * @return Collection<int, Cours>
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours[] = $cour;
+            $cour->setTrainer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->removeElement($cour)) {
+            // set the owning side to null (unless already changed)
+            if ($cour->getTrainer() === $this) {
+                $cour->setTrainer(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

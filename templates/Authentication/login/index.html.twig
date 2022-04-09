@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+
+{% block body %}
+
+    <section id="login" class="login">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <a href="{{ path('app_trainer_login') }}">login manager</a>
+                <p>Please sign in</p>
+            </div>
+
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {# <div class="col-lg-4 col-md-6 d-flex align-items-stretch"> #}
+                <form method="post" action="{{ path(app.request.attributes.get('_route') ) }}">
+
+                    <label for="username">Email:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required/>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" class="form-control" required/>
+
+                    <input type="hidden" name="_csrf_token"  value="{{ csrf_token('authenticate') }}">
+
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Send
+                    </button>
+
+                    <a href="{{ path('register_user') }}">Créer un compte ?</a>
+                </form>
+
+                {# recupere la route courante #}
+                {#                {{ dump(app.request.attributes.get('_route') ) }}#}
+            </div>
+        </div>
+    </section>
+{% endblock %}

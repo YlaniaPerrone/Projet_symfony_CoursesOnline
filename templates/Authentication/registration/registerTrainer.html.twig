@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <form class="row g-3" method="post" action="{{ path('app_manager_create_trainer') }}">
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+
+        {{ form_start(registerTrainer) }}
+
+        <div class="col-12">
+            {{ form_row(registerTrainer.firstname,  { 'attr': {'class': 'form-control'} }) }}
+
+        </div>
+        <div class="col-12">
+            {{ form_row(registerTrainer.name,  { 'attr': {'class': 'form-control'} }) }}
+
+        </div>
+        <div class="col-md-12">
+            {{ form_row(registerTrainer.email,  { 'attr': {'class': 'form-control'} }) }}
+
+        </div>
+
+        <div class="col-md-12">
+            {{ form_row(registerTrainer.password.first,  { 'attr': {'class': 'form-control'} }) }}
+        </div>
+
+        <div class="col-md-12">
+            {{ form_row(registerTrainer.password.second,  { 'attr': {'class': 'form-control'} }) }}
+        </div>
+
+        {# {{ form_row(registrationForm.agreeTerms) }} #}
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+        {{ form_end(registerTrainer) }}
+
+    </form>
+{% endblock %}

@@ -34,7 +34,7 @@ class Prestation
     #[ORM\Column(type: 'string', length: 50)]
     private $days;
 
-    #[ORM\OneToOne(mappedBy: 'prestation', targetEntity: Booking::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'prestation', targetEntity: Booking::class)]
     private $booking;
 
     public function getId(): ?int

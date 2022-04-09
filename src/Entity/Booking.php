@@ -13,7 +13,7 @@ class Booking
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\OneToOne(inversedBy: 'booking', targetEntity: Prestation::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'booking', targetEntity: Prestation::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $prestation;
 

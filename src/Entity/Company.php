@@ -21,17 +21,13 @@ class Company
     #[ORM\Column(type: 'string', length: 255)]
     private $numTVA;
 
-    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Trainer::class, cascade: ['persist'])]
-    #[ORM\JoinColumn(name: 'company_id', referencedColumnName: 'id')]
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Trainer::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private $trainers;
 
-//    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Cours::class, cascade: ['persist'])]
-//    private $cours;
 
     public function __construct()
     {
         $this->trainers = new ArrayCollection();
-//        $this->cours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,6 +57,13 @@ class Company
         $this->numTVA = $numTVA;
 
         return $this;
+    }
+
+
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     /**
@@ -93,38 +96,4 @@ class Company
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->name;
-    }
-
-//    /**
-//     * @return Collection<int, Cours>
-//     */
-//    public function getCours(): Collection
-//    {
-//        return $this->cours;
-//    }
-//
-//    public function addCour(Cours $cour): self
-//    {
-//        if (!$this->cours->contains($cour)) {
-//            $this->cours[] = $cour;
-//            $cour->setCompany($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCour(Cours $cour): self
-//    {
-//        if ($this->cours->removeElement($cour)) {
-//            // set the owning side to null (unless already changed)
-//            if ($cour->getCompany() === $this) {
-//                $cour->setCompany(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
 }

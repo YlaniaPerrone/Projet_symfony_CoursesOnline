@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <section id="login" class="login">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <p>Please Register</p>
+            </div>
+
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+{#                {% if error %}#}
+{#                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#                {% endif %}#}
+                <form class="row g-3" method="post" action="{{ path('register_user') }}" style="width:50%">
+
+                    {{ form_start(registrationClient) }}
+
+                    <div class="col-md-12">
+                        {{ form_row(registrationClient.firstname, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_row(registrationClient.name, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_row(registrationClient.email, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_row(registrationClient.password.first,  { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_row(registrationClient.password.second,  { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                    {{ form_end(registrationClient) }}
+                </form>
+            </div>
+        </div>
+    </section>
+
+    {# </div> #}
+{% endblock %}

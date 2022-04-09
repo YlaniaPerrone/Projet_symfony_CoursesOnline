@@ -16,6 +16,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Assert\Length(min: 2, max: 50, minMessage: 'Votre nom doit être min {{limit}} caracteres', maxMessage: "Votre nom doit être max {{limit}} caracteres")]
+    #[ORM\Column(type: 'string', length: 120)]
+    protected $name;
+
+    #[Assert\Length(min: 2, max: 50, minMessage: 'Votre prenom doit être min {{limit}} caracteres', maxMessage: "Votre nom doit être max {{limit}} caracteres")]
+    #[ORM\Column(type: 'string', length: 100)]
+    protected $firstname;
+
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
@@ -28,6 +36,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
     }
 
     public function getEmail(): ?string

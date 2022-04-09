@@ -11,8 +11,8 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-const $ = require('jquery');
-
-$(document).ready(function() {
-    $('[data-toggle="popover"]').popover();
-});
+// const $ = require('jquery');
+//
+// $(document).ready(function() {
+//     $('[data-toggle="popover"]').popover();
+// });

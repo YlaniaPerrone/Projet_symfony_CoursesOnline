@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+
+    <section id="register-company" class="company">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Register </h2>
+                <p>Teach online</p>
+            </div>
+
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+
+                    <form class="row g-3" method="post" action="{{ path('register_company') }}">
+
+                        {{ form_start(registerCompany) }}
+
+                        <div class="col-md-6">
+                            {{ form_row(registerCompany.name, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(registerCompany.numTVA, { 'attr': {'class': 'form-control'} }) }}
+
+                        </div>
+                        <div class="col-12">
+                            {{ form_row(registerCompany.trainers.firstname,  { 'attr': {'class': 'form-control'} }) }}
+
+                        </div>
+                        <div class="col-12">
+                            {{ form_row(registerCompany.trainers.name,  { 'attr': {'class': 'form-control'} }) }}
+
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_row(registerCompany.trainers.email,  { 'attr': {'class': 'form-control'} }) }}
+
+                        </div>
+
+                        <div class="col-md-12">
+                            {{ form_row(registerCompany.trainers.password.first,  { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+
+                        <div class="col-md-12">
+                            {{ form_row(registerCompany.trainers.password.second,  { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+
+                        {# {{ form_row(registrationForm.agreeTerms) }} #}
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </div>
+                        {{ form_end(registerCompany) }}
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
