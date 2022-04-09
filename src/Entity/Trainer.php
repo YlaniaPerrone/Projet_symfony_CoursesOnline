@@ -33,7 +33,7 @@ class Trainer implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'boolean')]
-    private $isActive;
+    private $isActive = true;
 
     #[ORM\ManyToOne(targetEntity: Company::class, cascade: ['persist', 'remove'], inversedBy: 'trainers')]
     #[ORM\JoinColumn(nullable: false)]

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PrestationController!{% endblock %}
+
+{% block body %}
+  <div class="row">
+      <section class="col-2">
+          {% include 'manager/dashboard/aside.html.twig' %}
+      </section>
+      <section class="col-10  ">
+
+          <div class="list-courses mx-5">
+          <a href="{{ path('app_trainer_prestation_new') }}">Create prestation</a>
+              <form class="row row-cols-lg-auto g-3 align-items-center">
+                  <table class="table align-middle mb-0 bg-white">
+                      <thead class="bg-light">
+                      <tr>
+                          <th>Id</th>
+                          <th>Start date</th>
+                          <th>Start time</th>
+                          <th>End date</th>
+                          <th>End time</th>
+                          <th>Days</th>
+                          <th>Course</th>
+                          <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody class="align-middle">
+                      {% for prestation in prestations %}
+
+                          <tr>
+                              <td>{{ prestation.id}}</td>
+                              <td>{{ prestation.startDate|date('d/m/Y')}}</td>
+                              <td>{{ prestation.startTime|date('H:s') }}</td>
+                              <td>{{ prestation.endDate|date('d/m/Y') }}</td>
+                              <td>{{ prestation.endTime|date('H:s') }}</td>
+                              <td>{{prestation.days}}</td>
+                              <td>{{prestation.cours.title}}</td>
+                              <td>{{prestation.cours.nbrSession}}</td>
+                              <td>
+                                  <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                      <a href="{{ path('app_trainer_prestation_edit', {'id': prestation.id}) }}"><i class="bi bi-pencil"></i></a>
+                                  </button>
+                              </td>
+                              <td>
+                                  <form method="post" action="{{ path('app_trainer_prestation_delete', {'id': prestation.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                      <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ prestation.id) }}">
+                                      <button class="btn"><i class="bi bi-trash"></i></button>
+                                  </form>
+
+                              </td>
+                          </tr>
+                      {% else %}
+                          <tr>
+                              <td colspan="4">no records found</td>
+                          </tr>
+                      {% endfor %}
+
+                      </tbody>
+                  </table>
+                  {# </div> #}
+              </form>
+
+          </div>
+
+          {# <form class="row row-cols-lg-auto g-3 align-items-center"> #}
+
+          {# </form> #}
+
+      </section>
+  </div>
+
+{% endblock %}

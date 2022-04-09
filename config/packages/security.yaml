@@ -47,7 +47,7 @@ security:
                 failure_path: app_login
             logout:
                 path: app_logout
-                target: home
+                target: app_home
 
 
             # activate different ways to authenticate

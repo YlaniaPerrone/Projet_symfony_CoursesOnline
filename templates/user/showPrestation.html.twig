@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PrestationShowController!{% endblock %}
+
+{% block body %}
+    <section id="about" class="about">
+
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+
+                <div class="info-trainer">
+                    {{ prestation.cours.trainer.firstname }} {{ prestation.cours.trainer.name }}
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2 aos-init aos-animate" data-aos="fade-left" data-aos-delay="100">
+                    <img src="assets/img/about.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                    <h3>{{ prestation.cours.language }} {{ prestation.cours.title }} - level{{ prestation.cours.level }} </h3>
+                    <p class="fst-italic">
+                        {{ prestation.cours.description }}
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> start {{ prestation.days}} {{ prestation.startDate|date('d/m/Y') }} at {{ prestation.startTime|date('h:m') }}</li>
+                        <li><i class="bi bi-check-circle"></i> {{ prestation.cours.nbrSession }} lessons</li>
+                        <li><i class="bi bi-check-circle"></i> Duration {{ prestation.cours.duration|date('d/m/Y') }}</li>
+                        <li><i class="bi bi-check-circle"></i> ...</li>
+                    </ul>
+                    <p>
+                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                    </p>
+
+                    <a type="button" class="btn btn-info" href="{{ path('booking_add', {'id': prestation.id}) }}">Reservation</a>
+
+                </div>
+            </div>
+    </section>
+{% endblock %}

@@ -12,7 +12,7 @@
         {% endblock %}
 
         {% if is_granted('ROLE_MANAGER') and is_granted('ROLE_TRAINER') %}
-            {% include 'Manager/dashboard/navAdmin.html.twig' %}
+            {% include 'manager' %}
 
         {% else %}
             {% include 'nav.html.twig' %}

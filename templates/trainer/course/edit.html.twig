@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit cours{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <section class="col-2">{% include 'manager/dashboard/aside.html.twig' %}</section>
+
+        <section class="col-10  ">
+
+
+
+            <div class="list-trainer mx-5">
+                <form class="row g-3" method="post" >
+
+                    <h1 class="h3 mb-3 font-weight-normal">Edit course</h1>
+
+                    {{ form_start(form) }}
+
+                    <div class="col-md-12">
+                        {{ form_row(form.category, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form_row(form.Title, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ form_row(form.level, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ form_row(form.price, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_row(form.nbrSession,  { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_row(form.Duration,  { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form_row(form.Description,  { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form_row(form.language,  { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                    {{ form_end(form) }}
+                </form>
+
+            </div>
+
+        </section>
+
+    </div>
+{% endblock %}

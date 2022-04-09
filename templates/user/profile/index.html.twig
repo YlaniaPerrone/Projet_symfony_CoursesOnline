@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+    <h1>test</h1>
+    <h1>test</h1>
+    <h1>test</h1>
+    <h1>test</h1>
+    <h1>test</h1>
+    <h1>test</h1>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Prenom: {{ app.user.firstname }}</p>
+        <p>Nom: {{ app.user.name }}</p>
+        <p>Email: {{ app.user.email }}</p>
+        <a type="button" href="{{ path('editClient', {'id': app.user.id}) }}">edit</a>
+    {% endif %}
+{% endblock %}

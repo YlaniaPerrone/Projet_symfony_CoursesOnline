@@ -1413,7 +1413,13 @@ section {
 }
 
 .company{
-  background-image: url(../images/trainers/bg.jpg);
+  //background-image: url(../images/trainers/bg.jpg);
+  //background-size: cover;
+  //background-position: center;
+}
+
+#register-company{
+  height: 44rem;
 }
 
 //=============== Aside ===============

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+   <div class="row">
+       <section class="col-2">{% include 'manager/aside.html.twig' %}</section>
+       <section class="col-10  ">
+           <div class="list-trainer">
+               <div class="row row-cols-lg-auto g-3 align-items-center"></div>
+               {{ form_start(form) }}
+               <div class="col-12">
+                   {{ form_row(form.firstname, { 'attr': {'class': 'form-control '} }) }}
+               </div>
+               <div class="col-12">
+                   {{ form_row(form.name, { 'attr': {'class': 'form-control '} }) }}
+               </div>
+               <div class="col-12">
+                   {{ form_row(form.email, { 'attr': {'class': 'form-control '} }) }}
+               </div>
+               <div class="col-12">
+                   {{ form_row(form.isActive, { 'attr': {'class': 'form-control '} }) }}
+               </div>
+
+               <div class="col-12">
+
+                   <button class="btn">{{ button_label|default('Save') }}</button>
+               </div>
+               {{ form_end(form) }}
+           </div>
+   </div>
+    </section>
+   </div>
+{% endblock %}

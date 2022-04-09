@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Trainer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -62,32 +63,52 @@ class TrainerRepository extends ServiceEntityRepository implements PasswordUpgra
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return Trainer[] Returns an array of Trainer objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Trainer[] Returns an array of Language objects
+     */
+    public function findTrainerByCompany(int $companyId): array
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('t.id', 't.firstname', 't.name', 't.email', 't.isActive')
+            ->andWhere('t.company = :companyId')
+//            ->andWhere('t.roles = :roles ')
+            ->setParameter('companyId', $companyId)
+//            ->setParameter('roles', $roles)
             ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+//            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Trainer
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findTrainerById(int $trainerId)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('t.id', 't.firstname', 't.name', 't.email', 't.roles','t.isActive')
+            ->andWhere('t.id = :trainerId')
+            ->setParameter('trainerId', $trainerId)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
-    */
+
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findTrainerByCourses(int $coursId): ?Trainer
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.cours')
+            ->andWhere('t.cours = : coursId')
+            ->setParameter('coursId', $coursId)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 }

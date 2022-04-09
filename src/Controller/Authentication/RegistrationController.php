@@ -26,14 +26,12 @@ class RegistrationController extends AbstractController
         $manager = new Trainer();
         $company = new Company();
         $form = $this->createForm(CompanyType::class, $company);
-
-//        $form = $this->createForm(RegistrationFormateurFormType::class, $manager);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
 //            casting
-            $formCompany = (object)$request->request->get('company')['trainers'];
+            $formCompany = (object)$request->get('company')['trainers'];
 
             $manager->setFirstname($formCompany->firstname);
             $manager->setName($formCompany->name);
@@ -43,20 +41,17 @@ class RegistrationController extends AbstractController
 
             if ($formCompany->password['first'] === $formCompany->password['second']) {
                 $manager->setPassword(
-                         $userPasswordHasher->hashPassword(
-                                $manager,
-//                      recup le premier
-                                $formCompany->password['first']
-                        )
+                     $userPasswordHasher->hashPassword(
+                            $manager,
+    //                      recup le premier
+                            $formCompany->password['first']
+                    )
                 );
 
             }
+            dump($formCompany);
 
-//
             $company->addTrainer($manager);
-
-//            dump($company);
-//            dump($form->isValid());
 
 //            return $this->json([$manager]);
             $entityManager->persist($company);
