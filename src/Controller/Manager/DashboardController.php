@@ -30,13 +30,13 @@ class DashboardController extends AbstractController
 //        dd($this->getUser());
 
             return $this->render('manager/index.html.twig', [
-
-        'trainer' => $trainerRepository->findTrainerByCompany($this->getUser()->getCompany()->getId()),
+            'trainer' => $trainerRepository->findAll()
+//        'trainer' => $trainerRepository->findTrainerByCompany($this->getUser()->getCompany()->getId()),
             ]);
 
     }
 
-    #[Route('/manager/trainer/create', name: 'app_manager_create_trainer', methods: ['POST', 'GET'])]
+    #[Route('/dashboard/trainer/create', name: 'app_manager_create_trainer', methods: ['POST', 'GET'])]
     public function create( Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, CompanyRepository $companyRepository): Response
     {
         $trainer = new Trainer();
@@ -64,14 +64,14 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_manager_dashboard');
         }
 
-        return $this->renderForm('manager/dashboard/trainerCreate.html.twig', [
+        return $this->renderForm('manager/trainer/trainerCreate.html.twig', [
                 'trainer' => $trainer,
                 'registerTrainer' => $form,
         ]);
 
     }
 
-    #[Route('/manager/trainer/edit/{id}', name: 'app_manager_edit_trainer', methods: ['POST', 'GET'])]
+    #[Route('/dashboard/trainer/edit/{id}', name: 'app_manager_edit_trainer', methods: ['POST', 'GET'])]
     public function edit(Trainer $trainer, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TrainerType::class, $trainer);
@@ -85,9 +85,9 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_manager_dashboard');
         }
 
-        return $this->renderForm('manager/dashboard/trainerEdit.html.twig', [
+        return $this->renderForm('manager/trainer/trainerCreate.html.twig', [
                 'trainer' => $trainer,
-                'form' => $form,
+                'registerTrainer' => $form,
         ]);
 
     }

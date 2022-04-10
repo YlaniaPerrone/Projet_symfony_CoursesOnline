@@ -18,12 +18,14 @@ class Prestation
     #[ORM\Column(type: 'time')]
     private $startTime;
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: 'time')]
     private $endTime;
 
     #[ORM\Column(type: 'date')]
     private $startDate;
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: 'date')]
     private $endDate;
 

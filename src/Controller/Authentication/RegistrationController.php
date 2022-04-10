@@ -96,34 +96,4 @@ class RegistrationController extends AbstractController
 
     }
 
-//    #[Route('/register/trainer', name: 'register_trainer', methods: ['GET', 'POST'])]
-//    public function registerTrainer(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-//    {
-//        $trainer = new Trainer();
-//        $form = $this->createForm(TrainerType::class, $trainer);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//
-//            $trainer->setPassword(
-//                    $userPasswordHasher->hashPassword(
-//                            $trainer,
-//                            $form->get('password')->getData()
-//                    )
-//            );
-//
-//            $trainer->setRoles(['ROLE_TRAINER']);
-//
-//
-//            $entityManager->persist($trainer);
-//            $entityManager->flush();
-//
-//            return $this->redirectToRoute('app_login');
-//        }
-//
-//        return $this->render('Authentication/registration/registerTrainer.html.twig', [
-//                'registrationTrainer' => $form->createView(),
-//        ]);
-//
-//    }
 }

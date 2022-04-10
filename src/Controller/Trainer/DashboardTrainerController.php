@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-#[Security("is_granted('ROLE_TRAINER')")]
+//#[Security("is_granted('ROLE_TRAINER')")]
 #[Route('/dashboard/trainer')]
 class DashboardTrainerController extends AbstractController
 {
@@ -25,12 +25,12 @@ class DashboardTrainerController extends AbstractController
 //        dd($coursRepository->findCoursesByTrainer($this->getUser()->getId()));
 //        dd($this->getUser()->getId());
         return $this->render('trainer/index.html.twig', [
-            'courses' => $coursRepository->findCoursesByTrainer($this->getUser()->getId())
-//            'courses' => $coursRepository->findAll()
+//            'courses' => $coursRepository->findCoursesByTrainer($this->getUser()->getId())
+            'courses' => $coursRepository->findAll()
         ]);
     }
 
-    #[Route('/new', name: 'coursNew',  methods: ['GET', 'POST'])]
+    #[Route('/course/new', name: 'coursNew',  methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $cours = new Cours();
@@ -54,7 +54,7 @@ class DashboardTrainerController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'courseEdit',  methods: ['GET', 'POST'])]
+    #[Route('/course/edit/{id}', name: 'courseEdit',  methods: ['GET', 'POST'])]
     public function edit(Cours $cours, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CoursType::class, $cours);

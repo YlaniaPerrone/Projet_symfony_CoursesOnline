@@ -4,30 +4,18 @@ namespace App\Controller\Authentication;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
-    #[Route('/auth/login', name: 'app_trainer_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    #[Route('/login', name: 'app_login', methods: ['GET', 'POST'])]
+    #[Route('/auth/login', name: 'app_trainer_login', methods: ['GET', 'POST'])]
+    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
-        if ($this->getUser()){
-//            dd(123);
-//            dd($this->isGranted('ROLE_MANAGER'));
-            switch ($this->getUser()){
-                case $this->isGranted('ROLE_MANAGER'):
-                    return $this->redirectToRoute('app_manager_dashboard');
 
-                case $this->isGranted('ROLE_TRAINER'):
-                    return $this->redirectToRoute('app_dashboard_trainer');
-
-                case $this->isGranted('ROLE_USER'):
-                    return $this->redirectToRoute('app_home');
-            }
-        }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user

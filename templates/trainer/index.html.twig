@@ -5,7 +5,7 @@
     {% block body %}
 
         <div class="row">
-            <section class="col-2">{% include 'manager/dashboard/aside.html.twig' %}</section>
+            <section class="col-2">{% include 'aside.html.twig' %}</section>
 
             <section class="col-10  ">
 
@@ -39,7 +39,7 @@
                                     <td class="col">{{ cours.Duration|date('H:i') }}</td>
                                     <td class="col">{{cours.Description}}</td>
 {#                                    get name language#}
-                                    <td class="col">{{cours.name}}</td>
+                                    <td class="col">{{cours.language.name}}</td>
                                     <td class="col">
                                         <button type="button" class="btn btn-link btn-sm btn-rounded">
                                             <a href="{{ path('courseEdit', {'id': cours.id}) }}"><i class="bi bi-pencil"></i></a>

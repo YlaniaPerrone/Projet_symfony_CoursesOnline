@@ -63,38 +63,38 @@ class TrainerRepository extends ServiceEntityRepository implements PasswordUpgra
         $this->_em->flush();
     }
 
-    /**
-     * @return Trainer[] Returns an array of Language objects
-     */
-    public function findTrainerByCompany(int $companyId): array
-    {
-        return $this->createQueryBuilder('t')
-            ->select('t.id', 't.firstname', 't.name', 't.email', 't.isActive')
-            ->andWhere('t.company = :companyId')
-//            ->andWhere('t.roles = :roles ')
-            ->setParameter('companyId', $companyId)
-//            ->setParameter('roles', $roles)
-            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
 
     /**
      * @throws NonUniqueResultException
      */
-    public function findTrainerById(int $trainerId)
+    public function findTrainerByCompany(string $userIdentifier): ?Trainer
     {
         return $this->createQueryBuilder('t')
-            ->select('t.id', 't.firstname', 't.name', 't.email', 't.roles','t.isActive')
-            ->andWhere('t.id = :trainerId')
-            ->setParameter('trainerId', $trainerId)
+            ->select('t')
+            ->addSelect('c')
+            ->join('t.company',  'c')
+            ->andWhere('t.email = :userIdentifier')
+            ->setParameter('userIdentifier', $userIdentifier)
+            ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getOneOrNullResult()
             ;
     }
+
+
+//    /**
+//     * @throws NonUniqueResultException
+//     */
+//    public function findTrainerByManager(int $trainerId)
+//    {
+//        return $this->createQueryBuilder('t')
+//            ->select('t')
+//            ->andWhere('t.id = :trainerId')
+//            ->setParameter('trainerId', $trainerId)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//            ;
+//    }
 
 
     /**
