@@ -15,10 +15,10 @@ class Company
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 50, unique: true)]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private $numTVA;
 
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Trainer::class, cascade: ['persist', 'remove'], orphanRemoval: true)]

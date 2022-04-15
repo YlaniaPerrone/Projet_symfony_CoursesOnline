@@ -16,8 +16,8 @@
 
             <div class="list-trainer">
                 <form class="row row-cols-lg-auto g-3 align-items-center">
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
+                    <table class="table align-middle mb-0 bg-white table-hover">
+                        <thead class="bg-light ">
                         <tr>
                             <th>Firstname</th>
                             <th>Name</th>
@@ -29,10 +29,10 @@
                         <tbody class="align-middle">
                         {% for trainer in trainer %}
                             <tr>
-                                <td>{{ trainer.firstname }}</td>
-                                <td>{{ trainer.name }}</p></td>
+                                <td>{{ trainer.firstname|capitalize }}</td>
+                                <td>{{ trainer.name|upper  }}</p></td>
                                 <td>{{ trainer.email }}</p></td>
-                                <td>
+                                <td class="text-center">
                                     {% if trainer.isActive == 0 %}
                                         <p class="bgred">disable</p>
                                     {% else %}

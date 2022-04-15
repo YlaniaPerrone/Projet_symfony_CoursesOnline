@@ -8,6 +8,10 @@ security:
                 auto
         App\Entity\User:
             algorithm: auto
+        App\Entity\Test:
+            algorithm: auto
+
+
 
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
@@ -15,12 +19,13 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Test
                 property: email
         app_trainer_provider:
             entity:
                 class: App\Entity\Trainer
                 property: email
+        # used to reload user from session & other features (e.g. switch_user)
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:

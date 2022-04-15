@@ -6,6 +6,7 @@ use App\Repository\TrainerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TrainerRepository::class)]
 class Trainer implements UserInterface, PasswordAuthenticatedUserInterface
@@ -36,7 +37,7 @@ class Trainer implements UserInterface, PasswordAuthenticatedUserInterface
     private $isActive = true;
 
     #[ORM\ManyToOne(targetEntity: Company::class, cascade: ['persist', 'remove'], inversedBy: 'trainers')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $company;
 
     public function getId(): ?int

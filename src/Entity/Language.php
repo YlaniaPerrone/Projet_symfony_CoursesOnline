@@ -23,12 +23,8 @@ class Language
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false, message="Your name cannot contain a number"
-     * )
-     */
+
+    #[Assert\Regex(pattern: "/\d/", message: "Your name cannot contain a number", match: false)]
     #[ORM\Column(type: 'string', length: 50, unique:true)]
     private $name;
 

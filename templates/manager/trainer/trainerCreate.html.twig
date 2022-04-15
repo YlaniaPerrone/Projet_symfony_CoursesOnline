@@ -9,7 +9,27 @@
       <section class="col-10 ">
           <div class="list-trainer">
               <div class="row row-cols-lg-auto g-3 align-items-center"></div>
-             {{ include('Authentication/registration/registerTrainer.html.twig') }}
+{#             {{ include('Authentication/registration/registerTrainer.html.twig') }}#}
+              {{ form_start(registerTrainer) }}
+              {{ form_row(registerTrainer.firstname, { 'attr': {'class': 'form-control'} }) }}
+              {{ form_row(registerTrainer.name, { 'attr': {'class': 'form-control'} }) }}
+              {{ form_row(registerTrainer.email, { 'attr': {'class': 'form-control'} }) }}
+              {{ form_row(registerTrainer.isActive, { 'attr': {'class': 'form-check-input '} }) }}
+
+              <button class="btn">{{ button_label|default('Save') }}</button>
+              {{ form_end(registerTrainer) }}
+
+{#              <form action="{{ path('app_manager_create_trainer') }}">#}
+
+{#              <label for="form_firstname">firstname</label><input type="text" id="form_firstname" name="_firstname" required="required"/>#}
+{#                  <label for="form_name">name</label><input type="text" id="form_name" name="_name" required="required"/>#}
+{#                  <label for="form_email">email</label><input type="text" id="form_email" name="form[email]" required="required"/>#}
+{#                  <div class="col-12">#}
+{#                      <button type="submit" class="btn btn-primary">Save</button>#}
+{#                  </div>#}
+{#              </form>#}
+{#              {{ dump(registerTrainer[registerTrainer.email]) }}#}
+
           </div>
     </section>
   </div>

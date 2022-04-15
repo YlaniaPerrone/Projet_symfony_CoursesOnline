@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -13,8 +15,11 @@ class Category
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 150)]
+    #[Assert\NotNull()]
+    #[Assert\Length(min: 2, max: 150)]
+    #[ORM\Column(type: 'string', length: 150, unique: true)]
     private $name;
+
 
     #[ORM\OneToOne(mappedBy: 'category', targetEntity: Cours::class, cascade: ['persist', 'remove'])]
     private $cours;

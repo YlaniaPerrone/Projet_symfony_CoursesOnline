@@ -3,17 +3,22 @@
 namespace App\Security;
 
 use App\Repository\TrainerRepository;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class CustomAuthentication extends AbstractLoginFormAuthenticator
 {
@@ -22,21 +27,25 @@ class CustomAuthentication extends AbstractLoginFormAuthenticator
     private const ACCESS_TRAINER = 'ROLE_TRAINER';
     private TrainerRepository $trainerRepository;
     private RouterInterface $router;
+    use TargetPathTrait;
 
-    public function __construct(TrainerRepository $trainerRepository, RouterInterface $router)
+    public function __construct(TrainerRepository $trainerRepository, RouterInterface $router, UrlGeneratorInterface $urlGenerator)
     {
         $this->trainerRepository = $trainerRepository;
         $this->router = $router;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function supports(Request $request): bool
     {
 //        dd($request->get('_route') === CustomAuthentication::LOGIN_ROUTE);
-//        dd($request->isMethod('POST') );
-        return ($request->get('_route') === CustomAuthentication::LOGIN_ROUTE && $request->isMethod('POST'));
+//        dd($this->getLoginUrl($request) === $request->getPathInfogetPathInfo());
+        return ($this->getLoginUrl($request) === $request->getPathInfo() && $request->isMethod('POST'));
+//        return ($request->get('_route') === CustomAuthentication::LOGIN_ROUTE && $request->isMethod('POST'));
 //        test if we are on the right route & if the user is logged  (no return logging form, go to authenticate)
 
     }
+
 
     public function authenticate(Request $request): Passport
     {
@@ -45,7 +54,10 @@ class CustomAuthentication extends AbstractLoginFormAuthenticator
         $email = $request->request->get('_username', '');
         $csrfToken = $request->request->get('_csrf_token');
 
-//            $userIdentifier -> recupere plus rapidement les infos de l'utilisateur
+        $request->getSession()->set(Security::LAST_USERNAME, $email);
+//        dd(        $request->getSession()->set(Security::LAST_USERNAME, $email));
+
+//      $userIdentifier -> recupere plus rapidement les infos de l'utilisateur
         return new Passport(
             new UserBadge($email, function ($userIdentifier) {
                 // optionally pass a callback to load the User manually
@@ -76,14 +88,19 @@ class CustomAuthentication extends AbstractLoginFormAuthenticator
 //            'session'  => $request->hasSession(),
 //
 //        ]);
+//        dd(        $request->getSession());
 
+        $request->getSession();
         $token->getUser()->eraseCredentials();
+        $request->getSession();
+        if (in_array(CustomAuthentication::ACCESS_MANAGER, $token->getRoleNames()) ) {
 
-        if (in_array(CustomAuthentication::ACCESS_MANAGER, $token->getRoleNames())) {
             return new RedirectResponse($this->router->generate('app_manager_dashboard'));
+
+//            dd('role manager',   $request->hasSession());
         }
 
-        return new RedirectResponse($this->router->generate('app_dashboard_trainer'));
+        return new RedirectResponse($this->router->generate('app_courses'));
 
     }
 
@@ -104,9 +121,12 @@ class CustomAuthentication extends AbstractLoginFormAuthenticator
 //            );
 //    }
 
-//    public function start(Request $request, AuthenticationException $authException = null) : Response
-//    {
-//        return new RedirectResponse($this->urlGenerator->generate('app_login'));
-//    }
+    public function start(Request $request, AuthenticationException $authException = null) : Response
+    {
+        dd(  $this);
+       return new RedirectResponse($this->urlGenerator->generate('app_login'));
+    }
+
+
 
 }
