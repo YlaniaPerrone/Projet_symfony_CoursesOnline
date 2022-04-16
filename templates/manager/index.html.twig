@@ -4,9 +4,30 @@
 
 {% block body %}
 
-    <div class="row">
+    <div class="row container-fluid px-4">
         <section class="col-2">{% include'aside.html.twig' %}</section>
         <section class="col-10  ">
+            <div class=" m-3">
+                <button class="btnAll">All</button>
+                <button class="btnAll"><i class="bi bi-filter btnFilter"> Filter</i></button>
+
+            </div>
+            <div class="filter  m-3">
+               <div class="actif">
+                   <div class="form-check">
+                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="trainerActive ">
+                       <label class="form-check-label" for="flexRadioDefault1">
+                           Default radio
+                       </label>
+                   </div>
+                   <div class="form-check">
+                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                       <label class="form-check-label" for="flexRadioDefault2">
+                           Default checked radio
+                       </label>
+                   </div>
+               </div>
+            </div>
             {# <section class="col-8 py-5 text-center container"> #}
             {# <a href="" id="btn-add-trainer">Add trainer</a> #}
 {#            <button id="btn-add-trainer">Add trainer</button>#}
@@ -27,7 +48,7 @@
                         </tr>
                         </thead>
                         <tbody class="align-middle">
-                        {% for trainer in trainer %}
+                        {% for trainer in trainers %}
                             <tr>
                                 <td>{{ trainer.firstname|capitalize }}</td>
                                 <td>{{ trainer.name|upper  }}</p></td>

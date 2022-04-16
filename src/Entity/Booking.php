@@ -13,6 +13,9 @@ class Booking
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $createAt;
+
     #[ORM\OneToOne(inversedBy: 'booking', targetEntity: Prestation::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $prestation;
@@ -22,10 +25,21 @@ class Booking
     private $user;
 
 
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCreateAt(): ?\DateTimeImmutable
+    {
+        return $this->createAt;
+    }
+
+    public function setCreateAt(\DateTimeImmutable $createAt): self
+    {
+        $this->createAt = $createAt;
+
+        return $this;
     }
 
     public function getPrestation(): ?Prestation
@@ -51,6 +65,8 @@ class Booking
 
         return $this;
     }
+
+
 
 
 }

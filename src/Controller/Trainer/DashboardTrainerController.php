@@ -5,6 +5,7 @@ namespace App\Controller\Trainer;
 use App\Entity\Cours;
 use App\Entity\User;
 use App\Form\CoursType;
+use App\Repository\CategoryRepository;
 use App\Repository\CoursRepository;
 use App\Repository\TrainerRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,13 +21,19 @@ class DashboardTrainerController extends AbstractController
 {
 
     #[Route('/', name: 'app_dashboard_trainer', methods: ['GET'])]
-    public function index(CoursRepository $coursRepository): Response
+    public function index(CoursRepository $coursRepository, CategoryRepository $categoryRepository): Response
     {
 //        dd($coursRepository->findCoursesByTrainer($this->getUser()->getId()));
 //        dd($this->getUser()->getId());
+//        dd($coursRepository->findNbrCoursesByTrainer());
         return $this->render('trainer/index.html.twig', [
 //            'courses' => $coursRepository->findCoursesByTrainer($this->getUser()->getId())
-            'courses' => $coursRepository->findAll()
+            'courses' => $coursRepository->findNbrCoursesByTrainer(),
+
+
+//            'courses' => $coursRepository->findAll(),
+//            'categories' => $categoryRepository->findAll()
+
         ]);
     }
 

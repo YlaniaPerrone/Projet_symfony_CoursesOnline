@@ -27,22 +27,28 @@
                             </tr>
                             </thead>
                             <tbody class="align-middle">
-                            {% for cours in courses %}
+                            {% for course in courses %}
 
                                 <tr>
-                                    <td class="col">{{ cours.id }}</td>
-{#                                    <td class="col">{{ cours.category }}</td>#}
-                                    <td class="col">{{ cours.Title }}</td>
-                                    <td class="col">{{ cours.level }}</td>
-                                    <td class="col">{{ cours.price }}</td>
-                                    <td class="col">{{ cours.nbrSession }}</td>
-                                    <td class="col">{{ cours.Duration|date('H:i') }}</td>
-                                    <td class="col">{{cours.Description}}</td>
+
+                                    <td class="col">{{ course.firstname }}</td>
+                                    <td class="col">{{ course.name }}</td>
+                                    <td class="col">{{ course.email }}</td>
+                                    <td class="col">{{ course.nbrCourses }}</td>
+
+{#                                    <td class="col">{{ course.id }}</td>#}
+{#                                    <td class="col">{{ course.category }}</td>#}
+{#                                    <td class="col">{{ course.Title }}</td>#}
+{#                                    <td class="col">{{ course.level }}</td>#}
+{#                                    <td class="col">{{ course.price }}</td>#}
+{#                                    <td class="col">{{ course.nbrSession }}</td>#}
+{#                                    <td class="col">{{ course.Duration|date('H:i') }}</td>#}
+{#                                    <td class="col">{{course.Description}}</td>#}
 {#                                    get name language#}
-                                    <td class="col">{{cours.language.name}}</td>
+{#                                    <td class="col">{{course.language.name}}</td>#}
                                     <td class="col">
                                         <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                            <a href="{{ path('courseEdit', {'id': cours.id}) }}"><i class="bi bi-pencil"></i></a>
+{#                                            <a href="{{ path('courseEdit', {'id': course.id}) }}"><i class="bi bi-pencil"></i></a>#}
                                         </button>
                                     </td>
 

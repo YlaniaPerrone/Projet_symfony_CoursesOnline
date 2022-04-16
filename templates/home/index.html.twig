@@ -13,42 +13,43 @@
             </div>
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
 
-
-                {% for prestation in prestations %}
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                        <div class="course-item">
-                            <div class="d-flex justify-content-between align-items-center mb-3 category">
-                                <h4 >{{ prestation.category }}</h4>
-{#                                <p class="price">{{ prestation.price }}€</p>#}
-                            </div>
-                            <img src="{{ asset('build/images/course-1.jpg') }}" class="img-fluid" alt="...">
-                            <div class="course-content">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h3><a href="{{ path('prestation', {'id': prestation.id}) }}">{{ prestation.title }}</a></h3>
-                                    <p class="price">{{ prestation.price }}€</p>
-                                </div>
-
+          {% for prestation in prestations %}
+              <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                  <div class="course-item">
+                      <div class="d-flex justify-content-between align-items-center mb-3 category">
+                          <h4>{{ prestation.name }}</h4>
+                          {# <p class="price">{{ prestation.price }}€</p> #}
+                      </div>
+                      <img src="{{ asset('build/images/course-1.jpg') }}" class="img-fluid" alt="...">
+                      <div class="course-content">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                              <h3><a href="{{ path('prestation_show', {'id': prestation.id}) }}">{{ prestation.Title }} - {{ prestation.language }} {{ prestation.level }}</a></h3>
+                              <p class="price">{{ prestation.price }}€</p>
+                          </div>
 
 
-                                    <p>{{ prestation.description }}</p>
-                                    <div class="trainer d-flex justify-content-between align-items-center">
-                                    <div class="trainer-profile d-flex align-items-center">
-                                        {#                                    <img src="{{ asset('build/images/trainers/trainer-1.jpg') }}" class="img-fluid" alt="">#}
-                                        <span>{{ prestation.trainer.firstname }} </span>
-{#                                        <span>Javie</span>#}
-                                    </div>
-                                    <div class="trainer-rank d-flex align-items-center">
-                                        <i class="bi bi-book"></i>&nbsp {{ prestation.nbrSession}} &nbsp;Lessons &nbsp;
-                                        <i class="bi bi-clock"></i>&nbsp; {{ prestation.duration |date('H:i')}} Hours
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                          <p>{{ prestation.Description }}</p>
+                          <div class="trainer d-flex justify-content-between align-items-center">
+                              <div class="trainer-profile d-flex align-items-center">
+                                  {# <img src="{{ asset('build/images/trainers/trainer-1.jpg') }}" class="img-fluid" alt=""> #}
+                                  <span>{{ prestation.firstname }} {{ prestation.lastname }}</span>
+
+
+                                  {# <span>Javie</span> #}
+                              </div>
+                              <div class="trainer-rank d-flex align-items-center">
+                                  <i class="bi bi-book"></i>&nbsp {{ prestation.nbrSession }} &nbsp;Lessons &nbsp;
+                                  <i class="bi bi-clock"></i>&nbsp; {{ prestation.Duration |date('H:i') }} Hours
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
                 {% endfor %}
-
             </div>
 
         </div>
     </section>
+
+{#    {{ dump(prestations) }}#}
 {% endblock %}

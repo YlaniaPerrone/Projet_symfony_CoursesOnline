@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <section id="courses filter-content " class="filter-content">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                    <div class="course-item">
+                        <div class="d-flex ">
+                            <button>froid</button>
+                            <button>froid</button>
+
+
+                        </div>
+                        <h6>categories</h6>
+{#                        {% for category in categories %}#}
+                        <select class="form-control" multiple="multiple">
+                            <option selected="selected">orange</option>
+                            <option>white</option>
+                            <option selected="selected">purple</option>
+                        </select>
+{#                        {% endfor %}#}
+
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            </div>
+        </div>
+    </section>
+
+    <section id="popular-courses " class="courses">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Courses</h2>
+                <p>Popular Courses</p>
+            </div>
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+                {% for prestation in prestations %}
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                        <div class="course-item">
+                            <div class="d-flex justify-content-between align-items-center mb-3 category">
+                                <h4>{{ prestation.cours.category.name }}</h4>
+                                {# <p class="price">{{ prestation.price }}€</p> #}
+                            </div>
+                            <img src="{{ asset('build/images/course-1.jpg') }}" class="img-fluid" alt="...">
+                            <div class="course-content">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h3>
+                                        <a href="{{ path('prestation_show', {'id': prestation.id}) }}">{{ prestation.cours.Title }}
+                                            - {{ prestation.cours.language }} {{ prestation.cours.level }}</a></h3>
+                                    <p class="price">{{ prestation.cours.price }}€</p>
+                                </div>
+
+
+                                <p>{{ prestation.cours.Description }}</p>
+                                <div class="trainer d-flex justify-content-between align-items-center">
+                                    <div class="trainer-profile d-flex align-items-center">
+                                        {# <img src="{{ asset('build/images/trainers/trainer-1.jpg') }}" class="img-fluid" alt=""> #}
+                                        <span>{{ prestation.cours.trainer.firstname }} {{ prestation.cours.trainer.name }}</span>
+
+
+                                        {# <span>Javie</span> #}
+                                    </div>
+                                    <div class="trainer-rank d-flex align-items-center">
+                                        <i class="bi bi-book"></i>&nbsp {{ prestation.cours.nbrSession }} &nbsp;Lessons
+                                                                  &nbsp;
+                                        <i class="bi bi-clock"></i>&nbsp; {{ prestation.cours.Duration |date('H:i') }}
+                                                                  Hours
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

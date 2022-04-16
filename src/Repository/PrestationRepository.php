@@ -45,22 +45,23 @@ class PrestationRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Prestation[] Returns an array of Prestation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+//SELECT  prestation.id AS prestationId, cours.* FROM prestation inner join cours ON cours_id = cours.id
+
+
+
+    public function showPrestation(): array
     {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('p')
+            ->select(['p.id','c.Title', 'c.Description', 'c.price', 'c.level',  'c.nbrSession', 'c.Duration', 't.firstname', 't.name as lastname' , 'l.name as language', 'category.name' ])
+            ->innerJoin('p.cours',  'c')
+            ->innerJoin('c.trainer', 't')
+            ->innerJoin('c.language', 'l')
+            ->innerJoin('c.category', 'category')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Prestation

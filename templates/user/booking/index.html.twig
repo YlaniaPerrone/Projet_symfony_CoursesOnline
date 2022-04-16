@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookingController!{% endblock %}
+
+{% block body %}
+    <section class="card">
+        <div class="tableCard">
+            <h1>Your card</h1>
+            {# {{ dump(items) }} #}
+            {% if item | length >0 %}
+
+                <p>you have booked the {{ item.cours.trainer.firstname }} {{ item.cours.trainer.name }}
+                   course, which will start {{ item.startDate|date('d/m/Y') }}
+                   at {{ item.startDate|date('h:m') }}
+                </p>
+
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th scope="col">Course</th>
+                        <th scope="col">level</th>
+                        <th scope="col">prix</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ item.cours.title }}</td>
+                        <td>{{ item.cours.level }}</td>
+                        <td>{{ item.cours.price }}</td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right">Total : {{ item.cours.price }} €</td>
+                    </tr>
+                    </tfoot>
+
+                </table>
+
+                <a type="submit" class="btn btn-success" href="{{ path('app_booking') }}">Book</a>
+            {% else %}
+                <p>card, is empty</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

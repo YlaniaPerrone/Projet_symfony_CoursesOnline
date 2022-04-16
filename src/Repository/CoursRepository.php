@@ -66,16 +66,24 @@ class CoursRepository extends ServiceEntityRepository
                 ;
     }
 
+    /**
+     * @return Cours[]
+     */
 
-    /*
-    public function findOneBySomeField($value): ?Cours
+    public function findPrestationByTrainer(): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('count(c.id) as nbrCourses')
+            ->addSelect(['t.name', 't.firstname', 't.email'])
+            ->innerJoin('c.trainer', 't' )
+            ->groupBy('t.id')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult()
+            ;
     }
-    */
+
+
+
+
+
 }

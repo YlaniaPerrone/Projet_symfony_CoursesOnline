@@ -7,6 +7,7 @@ use App\Entity\Trainer;
 use App\Form\CompanyType;
 use App\Form\TrainerTestType;
 use App\Form\TrainerType;
+use App\Repository\CategoryRepository;
 use App\Repository\CompanyRepository;
 use App\Repository\TrainerRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,7 +43,7 @@ class DashboardController extends AbstractController
 //        dd($this->getUser());
 
             return $this->render('manager/index.html.twig', [
-            'trainer' => $trainerRepository->findAll()
+            'trainers' => $trainerRepository->findAll()
 //        'trainer' => $trainerRepository->findTrainerByCompany($this->getUser()->getCompany()->getId()),
             ]);
 
@@ -57,7 +58,7 @@ class DashboardController extends AbstractController
         $trainer = new Trainer();
 //        create random password (6,15) and convert to string
         $password = ByteString::fromRandom(rand(6,15))->toString();
-        $form = $this->createForm(TrainerTestType::class, $trainer);
+        $form = $this->createForm(TrainerType::class, $trainer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,7 +103,7 @@ class DashboardController extends AbstractController
     #[Route('/dashboard/trainer/edit/{id}', name: 'app_manager_edit_trainer', methods: ['POST', 'GET'])]
     public function edit(Trainer $trainer, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TrainerTestType::class, $trainer);
+        $form = $this->createForm(TrainerType::class, $trainer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -119,6 +120,15 @@ class DashboardController extends AbstractController
         ]);
 
     }
+
+    #[Route( name: 'app_manager_filter_trainer_active', methods: ['POST', 'GET'])]
+    public function filter(TrainerRepository $trainerRepository)
+    {
+        $trainer = $trainerRepository->findBy(
+            ['isActive' => true]
+        );
+    }
+
     //    #[Security("is_granted('ROLE_MANAGER')")]
 //    #[Route('/manager/trainer/add', name: 'app_manager_add_trainer', methods: ['POST', 'GET'])]
 //    public function create(TrainerRepository $trainerRepository, EntityManagerInterface $manager,  CompanyRepository $companyRepository, UserPasswordHasherInterface $userPasswordHasher): JsonResponse

@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-#[Security("is_granted('ROLE_TRAINER')")]
+//#[Security("is_granted('ROLE_TRAINER')")]
 #[Route('/dashboard/trainer/prestation')]
 class PrestationController extends AbstractController
 {

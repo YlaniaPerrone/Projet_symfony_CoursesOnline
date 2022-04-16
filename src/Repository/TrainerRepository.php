@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Cours;
 use App\Entity\Trainer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -96,19 +97,18 @@ class TrainerRepository extends ServiceEntityRepository implements PasswordUpgra
 //            ;
 //    }
 
-
-    /**
-     * @throws NonUniqueResultException
-     */
-    public function findTrainerByCourses(int $coursId): ?Trainer
-    {
-        return $this->createQueryBuilder('t')
-            ->select('t.cours')
-            ->andWhere('t.cours = : coursId')
-            ->setParameter('coursId', $coursId)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
+//    /**
+//     * @throws NonUniqueResultException
+//     */
+//    public function findTrainerByCourses(int $coursId): ?Trainer
+//    {
+//        return $this->createQueryBuilder('t')
+//            ->select('t.cours')
+//            ->andWhere('t.cours = : coursId')
+//            ->setParameter('coursId', $coursId)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//            ;
+//    }
 
 }
